@@ -1,0 +1,92 @@
+\documentclass[12pt, twoside]{article}
+\usepackage{titlesec, fancyhdr, float, mathtools, amsmath, amssymb, amsthm, enumitem, mleftright, tikz, pgfplots, scrextend, lipsum}
+\usepackage[makeroom]{cancel}
+\usepackage[margin = 1in]{geometry}
+\usepackage[allcolors = black, colorlinks]{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Definitions and formatting
+\newcommand{\p}[1]{\mleft( #1 \mright)}
+\newcommand{\abs}[1]{\mleft| #1 \mright|}
+\newcommand{\diff}[1]{\mathrm{d}#1}
+\newcommand{\noskip}
+{
+	\setlength\abovedisplayskip{0pt}
+	\setlength\belowdisplayskip{0pt}
+}
+\newcommand{\normalskip}
+{
+	\setlength\abovedisplayskip{\baselineskip}
+	\setlength\belowdisplayskip{\baselineskip}
+}
+\renewcommand{\contentsname}{Table of Contents}
+\titlespacing*{\subsection}{0pt}{\baselineskip}{0.5\baselineskip}
+\titlespacing*{\section}{0pt}{\baselineskip}{0.5\baselineskip}
+\setlength\parindent{0pt}
+\raggedbottom
+
+%%%%%%%%%%%%%%%%%%%%%%%% Plot formatting
+\def\slopecolor{blue!80!white}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Custom environments
+\newenvironment{example}
+{
+	\textit{Example:}
+	\begin{addmargin*}{0.25in}
+}
+{
+	\end{addmargin*}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Theorem environments
+\makeatletter
+\def\thm@space@setup%
+{%
+	\thm@preskip = \baselineskip
+	\thm@postskip = \baselineskip
+}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+\newtheorem*{remark}{Remark}
+
+\begin{document}
+
+\noskip
+
+%%%%%%%%%%%%%%%%%%%%%%%% Title page and table of contents
+\pagestyle{empty}
+\begin{center}
+	\vspace*{10\baselineskip}
+	\LARGE MATH 33B \\
+	\Large Steven Truong
+\end{center}
+\cleardoublepage
+
+\tableofcontents
+\cleardoublepage
+\setcounter{page}{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Readjusting the layout of the page
+\newgeometry{outer = 1in, inner = 0.5in}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\fancyhead[LE, RO]{\thepage}
+\fancyhead[RE, LO]{\rightmark}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Beginning of study guide
+\section{Introduction}%
+\input{sections/introduction}
+
+\clearpage
+\section{Separable Equations}
+\input{sections/separable}
+
+\section{Linear Equations}
+\input{sections/linear}
+	
+\section{Exact Differential Equations}
+\input{sections/exact}
+
+\end{document}

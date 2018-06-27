@@ -1,0 +1,81 @@
+\subsection{Motivation}
+\begin{definition}
+	A first order ordinary differential equation is called \textit{separable} if it can be written in the form $y' = f\p{t}g\p{y}$.
+\end{definition}
+Separable equations appear relatively often in real life. One scenario is in radioactive decay of nuclei.
+\par\bigskip
+Suppose $N\p{t}$ is the amount of a nuclei at a time $t$. In our model, we assume that the amount of decay is proportional to the amount of nuclei $N$ and the length of time $\Delta t$. Then
+\normalskip
+\begin{align*}
+	\Delta N &= N\p{t + \Delta t} - N\p{t} \approx -\lambda N\p{t} \Delta t \\
+		  N' &= \lim_{\Delta t\to0} \frac{N\p{t + \Delta t} - N\p{t}}{\Delta t} = -\lambda N
+\end{align*}
+The equation can then be solved as follows:
+\begin{align*}
+	N' &= -\lambda N \\
+	\frac{\diff{N}}{\diff{t}} &= -\lambda N \\
+	\frac{\diff{N}}{N} &= -\lambda \, \diff{t}, \qquad N \neq 0\text{, but note that it is a solution to the ODE} \\
+	\int \frac{\diff{N}}{N} &= \int -\lambda \, \diff{t} \\
+	\ln\abs{N} &= -\lambda t + C_0 \\
+	\abs{N} &= Ce^{-\lambda t}, \qquad C = e^{C_0} > 0 \\
+	N &=
+	\begin{cases}
+		\phantom{-}Ce^{-\lambda t}, & N\p{t_0} > 0 \\
+		-Ce^{-\lambda t}, & N\p{t_0} < 0
+	\end{cases}
+\end{align*}
+If we allow $C$ to take on any real value, then the general solution to the ODE can be written as \[ N\p{t} = Ce^{-\lambda t}. \]
+\clearpage
+\begin{example}
+	\noskip
+	\begin{flalign*}
+		y' &= t^2y^2 \\
+		\frac{\diff{y}}{y^2} &= t^2 \, \diff{t} \\
+		\int \frac{\diff{y}}{y^2} &= \int t^2 \, \diff{t} \\
+		-\frac{1}{y} &= \frac{1}{3}t^3 + C \\
+		y &= -\frac{1}{\frac{1}{3}t^3 + C}
+	\end{flalign*}
+	Note that $y\p{t} = 0$ is also a solution.
+\end{example}
+
+\subsection{``Proof''}
+Suppose we have the separable ODE \[ y' = \frac{f\p{t}}{g\p{y}}. \] Then
+\normalskip
+\begin{align*}
+	g\p{y} y' &= f\p{t} \\
+	\int g\p{y} y' \, \diff{t} &= \int f\p{t} \, \diff{t} \\
+	\int g\p{y} \, \diff{y} &= \int f\p{t} \, \diff{t}, \qquad y = y\p{t} \implies \diff{y} = \frac{\diff{y}}{\diff{t}} \, \diff{t}
+\end{align*}
+which is the same result from using separation of variables.
+
+\subsection{Using Definite Integration (Newton's Law of Cooling)}
+Newton's Law of Cooling states that the change in temperature of an object over time is directly proportional to the difference between the object's current temperature $T$ and the ambient temperature $A$. Mathematically, \[ \frac{\diff{T}}{\diff{t}} = -k\p{T - A}. \] Suppose we had the initial condition $T\p{t_0} = T_0$. Then we can solve the IVP using separation of variables:
+\begin{align*}
+	\frac{\diff{T}}{\diff{t}} &= -k\p{T - A} \\
+	\frac{\diff{T}}{T - A} &= -k \, \diff{t}
+\end{align*}
+Instead of finding the general solution and then solving for the constant, we can use definite integration to get the particular solution directly. As time goes from $t_0$ to $t$, temperature goes from $T_0$ to $T\p{t}$. Thus,
+\begin{align*}
+	\int_{T_0}^{T\p{t} }\frac{\diff{u}}{u - A} &= \int_{t_0}^{t} -k \, \diff{v} \\
+	\ln\abs{T - A} - \ln\abs{T_0 - A} &= -k\p{t - t_0} \\
+	T\p{t} &= A + \p{T_0 - A}e^{-k\p{t - t_0}}
+\end{align*}
+
+\subsection{Implicitly Defined Solutions}
+Sometimes, we are unable to find an explicit solution to an ODE. I.e., we are unable to get a solution in the form of $y\p{t} = f\p{t}$. Consider the separable differential equation \[ y' = \frac{g\p{t}}{f\p{y}} \] and that $f\p{y}$ and $g\p{t}$ have antiderivatives $F\p{y}$ and $G\p{t}$, respectively. Separation of variables yields
+\begin{align*}
+	\int f\p{y} \, \diff{y} &= \int g\p{t} \, \diff{t} + C \\
+	F\p{y} &= G\p{t} + C \\
+	y &= F^{-1}\p{G\p{t} + C}
+\end{align*}
+If we are unable to find $F^{-1}$, then we will not be able to find an explicit solution for the differential equation.
+\par\pagebreak
+\begin{example}
+	\noskip
+	\begin{align*}
+		x' &= \frac{x^2}{\p{1 + x}t} \\
+		\int \frac{1}{x^2} + \frac{1}{x} \, \diff{x} &= \int \frac{1}{t} \, \diff{t} \\
+		-\frac{1}{x} + \ln\abs{x} &= \ln\abs{t} + C
+	\end{align*}
+	We are unable to solve for $x$, so we cannot find an explicitly defined solution.
+\end{example}

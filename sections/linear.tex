@@ -1,0 +1,154 @@
+\subsection{Introduction}
+\begin{definition}
+	A first order linear differential equation is given by $x' = a\p{t}x + f\p{t}$. If $f\p{t} = 0$, then the equation is said to be \textit{homogeneous}. Otherwise, it is said to be \textit{inhomogeneous}.
+\end{definition}
+\begin{minipage}[t]{0.5\textwidth}
+	\textit{Examples:}
+	\vspace{-\baselineskip}
+	\begin{addmargin}{0.25in}
+		\noskip
+		\begin{flalign*}
+			& x' = tx + t^2 & \\
+			& x' = \p{\frac{\sin{t}}{t} + e^t}x + e^{t^2}
+		\end{flalign*}
+	\end{addmargin}
+\end{minipage}%
+\begin{minipage}[t]{0.5\textwidth}
+	\textit{Non-examples:}
+	\vspace{-\baselineskip}
+	\begin{addmargin}{0.25in}
+		\noskip
+		\begin{flalign*}
+		 	& x' = x^2 & \\
+			& xx' = \sin{t} \\
+			& x' = \sin{x}
+		\end{flalign*}
+	\end{addmargin}
+\end{minipage}%
+
+\subsection{Solutions to Homogeneous Linear Equations}
+\normalskip
+Homogeneous first order linear differential equations are of the form $x' = a\p{t}x$. Notice that it is separable, and that the general solution is given by \[ x\p{t} = Ce^{\int a\p{t} \, \diff{t}}, \text{ where } C \in \mathbb{R}. \]
+
+\subsection{Solutions to Inhomogeneous Equations}
+\subsubsection{Integrating Factors}
+Consider the simple inhomogeneous equation \[ x' + x = A. \] The appearance of the $+$ sign and a derivative reminds us of the product rule. As the equation stands, we can't write it as a derivative of a product. However, if we multiply it by some function, we will be able to. The integrating factor for this particular differential equation is $e^x$. Notice that $\p{e^x x}' = e^x x' + e^x x$. Then
+\begin{align*}
+	e^x x' + e^x x &= Ae^x \\
+	\p{e^x x}' &= Ae^x
+\end{align*}
+which is a separable equation in terms of the function $e^x x$. Using the substitution $u = e^x x$ will make this clear:
+\begin{align*}
+	u' &= Ae^x \\
+	\int \diff{u} &= \int Ae^x \, \diff{x} \\
+	u &= Ae^x + C \\
+	e^x x &= Ae^x + C
+\end{align*}
+We now generalize this method to any first order linear ODE.
+\par\bigskip
+Consider a linear equation written in the form $x' + a\p{t}x = f\p{t}$. Our goal is to find some function $\mu\p{t}$ so that after multiplying both sides of the equation, the LHS can be written as the derivative of a product.
+\[ \mu\p{t} x' + \mu\p{t} a\p{t}x = g'\p{t} \]
+By inspection, it is easy to see that the LHS is the derivative of a function times the function $x$. Taking $g\p{t} = h\p{t}x$, we have
+\begin{align*}
+	\p{h\p{t}x}' &= \mu\p{t} x' + \mu\p{t} a\p{t}x \\
+	h\p{t}x' + h'\p{t}x &= \mu\p{t} x' + \mu\p{t} a\p{t}x \\
+	\implies h\p{t} = \mu\p{t}, \, h'\p{t} &= \mu'\p{t} = \mu\p{t} a\p{t} \\
+	\mu\p{t} &= Ce^{\int a\p{t} \, \diff{t}}
+\end{align*}
+Notice that the value of $C$ does not matter, as long as it is non-zero. We take $\mu\p{t} = e^{\int a\p{t} \, \diff{t}}$, which yields
+\begin{align*}
+	\mu\p{t} x' + \mu\p{t} a\p{t}x &= \mu\p{t} f\p{t} \\
+	\p{\mu\p{t} x}' &= \mu\p{t} f\p{t} \\
+	\mu\p{t} x &= \int \mu\p{t} f\p{t} \, \diff{t} \\
+	x &= \frac{1}{\mu\p{t}} \int \mu\p{t} f\p{t} \, \diff{t} \\
+	x\p{t} &= e^{-\int a\p{t} \, \diff{t}} \int f\p{t} e^{\int a\p{t} \, \diff{t}} \, \diff{t}
+\end{align*}
+This formula is quite complicated and not worth memorizing. It is easier to find $\mu\p{t}$ and then work from there.
+\par\bigskip
+\begin{example}
+	\noskip
+	\begin{align*}
+		x' + x\tan{t} &= 2t\cos{t} \\
+		\mu = e^{\int \tan{t} \, \diff{t}} &= e^{\ln\abs{\sec{t}}} = \sec{t} \\
+		x'\sec{t} + x\sec{t}\tan{t} &= 2t \\
+		\p{x\sec{t}}' &= 2t \\
+		x\sec{t} &= t^2 + C \\
+		x &= t^2\cos{t} + C\cos{t}
+	\end{align*}
+\end{example}
+
+\subsubsection{Variation of Parameters}
+\normalskip
+Consider the linear equation \[ y' = 3y + 6. \] Now, consider the associated homogeneous equation: \[ y'_h = 3y_h \implies y_h = Ae^{3t} \] The solution to the associated homogeneous equation is related to the solution of our original equation somehow. Once again, the $+$ sign is suggestive of the product rule, so we will guess that the solution is the product of $y_h\p{t}$ and another function $v\p{t}$. Let $y\p{t} = v\p{t}y_h\p{t}$. Then
+\begin{align*}
+	y' = v'y_h + vy'_h &= 3vy_h + 6 \\
+	v' \cdot Ae^{3t} + \cancel{v \cdot 3Ae^{3t}} &= \cancel{3v \cdot Ae^{3t}} + 6 \\
+	v' &= \frac{6}{A}e^{-3t} \\
+	v &= -\frac{2}{A}e^{-3t} + C
+\end{align*}
+Thus, the general solution to the ODE is given by \[ y\p{t} = -2 + Ce^{3t}. \]
+\par
+We will now generalize this method to any first order linear ODE. Consider the equation \\ $y' = a\p{t}y + f\p{t}$ and its associated homogeneous equation: \[ y'_h = a\p{t}y_h \implies y_h = Ae^{\int a\p{t} \, \diff{t}} \]
+Again, we assume that the solution to our ODE will be of the form $y\p{t} = v\p{t}y_h\p{t}$. Then
+\begin{align*}
+	y' = v'y_h + vy'_h &= a\p{t}vy_h + f\p{t} \\
+	v' \cdot Ae^{\int a\p{t} \, \diff{t}} + \cancel{v \cdot Aa\p{t}e^{\int a\p{t} \, \diff{t}}} &= \cancel{v \cdot Aa\p{t}e^{\int a\p{t} \, \diff{t}}} + f\p{t} \\
+	v' &= \frac{1}{A}f\p{t}e^{-\int a\p{t} \, \diff{t}} \\
+	v &= \frac{1}{A} \int f\p{t}e^{-\int a\p{t} \, \diff{t}} \, \diff{t}
+\end{align*}
+which gives us the general solution \[ y\p{t} = e^{\int a\p{t} \, \diff{t}} \int f\p{t}e^{-\int a\p{t} \, \diff{t}} \, \diff{t}. \] Note that the solution from here and from using integrating factors differ by a negative sign on $a\p{t}$. This is simply because of the general form of each equations we started with: in the section of integrating factors we had $y' + a\p{t}y = f\p{t}$ whereas in this section, we used the form $y' = a\p{t}y + f\p{t}$. We can simply rewrite the second equation as $y' + \p{-a\p{t}}y = f\p{t}$, which eliminates the discrepancy.
+\subsubsection{Structure of Solutions}
+\begin{theorem}
+	Let $y' - ay = f$ be a general first order linear differential equation. Suppose that $y_p\p{t}$ is a particular solution to the equation, and $y_h\p{t}$ is a particular solution to the associated homogeneous differential equation $y' - ay = 0$. Then every solution of $y' - ay = f$ is of the form \[ y\p{t} = y_p\p{t} + Cy_h\p{t}. \]
+\end{theorem}
+\begin{proof}
+	Consider the differential equation $y' - ay = f$, and the function $y\p{t} = y_p\p{t} + Cy_h\p{t}$ with $y_p$ and $y_h$ be as described above. Then
+	\begin{align*}
+		y'\p{t} - ay\p{t} &= \p{y_p + Cy_h}' - a\p{y_p + Cy_h} \\
+								  &= y_p' + Cy_h' - ay_p - Cay_h \\
+								  &= \p{y_p' - ay_p} + C\p{y_h' - ay_h} \\
+								  &= f + C \cdot 0 \\
+		y'\p{t} - ay\p{t} &= f
+	\end{align*}
+	Thus, $y\p{t} = y_p\p{t} + Cy_h\p{t}$ satisfies the differential equation.
+\end{proof}
+\subsection{Mixing Problems}
+\textit{Example:} \\
+\begin{minipage}[t]{0.25\textwidth}
+	\begin{tikzpicture}[baseline = (current bounding box.north)]
+		\draw[->] (1, -0.25) -- (1, -0.75) node[pos = 0, above] {\begin{tabular}{c} 5 gal/min \\ 1 lb/gallon of salt \end{tabular}};
+		\fill[fill=blue!20!white] (0, -1) rectangle (2, -2);
+		\draw (0, -0.5) -- (0, -2) -- (2, -2) -- (2, -0.5);
+		\node at (1, -1.5) {\begin{tabular}{c} 100~gal \\ Pure water \end{tabular}};
+		\draw[->] (1, -2.25) -- (1, -2.75) node[pos = 1, below] {2 gal/min};
+	\end{tikzpicture}
+\end{minipage}%
+\begin{minipage}[t]{0.75\textwidth}
+	\begin{center}
+		(We assume the liquid in the tank is homogeneous at all times.)
+	\end{center}
+	We want to model the amount of salt in the container at any time. Let $x\p{t}$ be the number of pounds of salt at time $t$. While we can't model $x\p{t}$ directly, we can easily model its rate of change. To do so, we have to look at how much salt flows in and out over time. The rate of salt flow is simply the rate at which the solution flows in or out multiplied by the concentration of salt. In other words, it's the amount of salt that comes with the solution per unit time. Thus, we can model the rate of change of $x\p{t}$ as follows:
+\end{minipage}
+\begin{align*}
+		\frac{\diff{x}}{\diff{t}} &= \text{(inflow of salt)} - \text{(outflow of salt)} \\
+		&= \p{5~\frac{\text{gal}}{\text{min}} \cdot 1~\frac{\text{lb}}{\text{gal}}} - \p{2~\frac{\text{gal}}{\text{min}} \cdot \frac{x}{100 + \p{5 - 3}t}~\frac{\text{lb}}{\text{gal}}} \\
+		&= 5~\frac{\text{lb}}{\text{min}} - \frac{2x}{100 + 2t}~\frac{\text{lb}}{\text{min}} \\
+		&= 5 - \frac{x}{50 + t}
+\end{align*}
+Notice that the outflow of salt is a function of $x$ and $t$, which is because the amount of salt isn't constant and the amount of solution in the tank changes over time (at a constant rate in this problem).
+\par\bigskip
+The differential equation is linear with the initial condition $x\p{0} = 0$, meaning we can solve it using any of the techniques discussed in this chapter. We will use variation of parameters (Section 3.3.2).
+\begin{align*}
+	\frac{\diff{x_h}}{\diff{t}} &= -\frac{x_h}{50 + t} \\
+	\int\frac{\diff{x_h}}{x_h} &= -\int\frac{\diff{t}}{50 + t} \\
+	\ln{\abs{x_h}} &= -\ln{\abs{50 + t}} \\
+	x_h &= \frac{1}{50 + t} \qquad \text{(both quantities are positive)}
+\end{align*}
+Our solution will be in the form $x = vx_h$, so substituting into the differential equation yields
+\begin{align*}
+	v'x_h + vx_h' &= 5 - \frac{vx_h}{50 + t} \\
+	\frac{v'}{50 + t} - \cancel{\frac{v}{\p{50 + t}^2}} &= 5 - \cancel{\frac{v}{\p{50 + t}^2}} \\
+	\frac{\diff{v}}{\diff{t}} &= 5\p{50 + t} \\
+	v &= 250t + \frac{5}{2}t^2 + C
+\end{align*}
+Thus, the general solution to the mixing problem is given by \[ x\p{t} = \frac{250t + \frac{5}{2}t^{2} + C}{50 + t}. \] With the initial condition $x\p{0} = 0$, we get \[ \frac{C}{50} = 0 \implies C = 0, \] so the solution to the mixing problem is \[ x\p{t} = \frac{250t + \frac{5}{2}t^2}{50 + t} = \frac{500t + t^2}{100 + 2t}. \] A common variation to this problem is the addition to one or more tanks. In those problems, the outflow of one tank may be the inflow of another, but the overall setup will be the same. The main difference is that there will be more differential equations to solve, but they will all be linear.
