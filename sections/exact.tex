@@ -1,2 +1,28 @@
 \subsection{Introduction}
-In this section, we will be dealing with differential equations of the form $P\p{x, y} + Q\p{x, y}y' = 0$, which we can write as $P\p{x, y}\,\diff{x} + Q\p{x, y}\,\diff{y} = 0$.
+In this section, we will be dealing with differential equations of the form $P\p{x, y} + Q\p{x, y}y' = 0$, which we will write as $P\p{x, y}\,\diff{x} + Q\p{x, y}\,\diff{y} = 0$.
+
+Our goal is to find a real-valued function $F\p{x, y}$ such that $F\p{x, y} = C$ implicitly defines a solution to the differential equation. To illustrate this, consider the following example.
+
+\textit{Example:} \\
+Let $P\p{x, y} = x$, $Q\p{x, y} = y$. We claim that the equation
+\begin{equation}
+	F\p{x, y} = x^2 + y^2 = C	
+\end{equation}
+implicitly defines a solution to the exact differential equation
+\[
+	x\,\diff{x} + y\,\diff{y} = 0.
+\]
+Taking the derivative with respect to $x$ on both sides of (1) yields
+\begin{align*}
+	2x + 2y\frac{\diff{y}}{\diff{x}} &= 0 \\
+	2x\,\diff{x} + 2y\,\diff{y} &= 0 \\
+	x\,\diff{x} + y\,\diff{y} &= 0
+\end{align*}
+as we wanted to show.
+
+So, $x^2 + y^2 = C$ are solutions to the problem, which are circles of radius $\sqrt{C}$ centered at the origin.
+
+\begin{definition}
+	Suppose that the solutions for the differential equation $P\p{x, y} + Q\p{x, y}y' = 0$ are implicitly given by $F\p{x, y} = C$. Then the set $\left\{\p{x, y} \in \mathbb{R}^2 \mid F\p{x, y} = C \right\}$ are called the \textbf{integral curves} of the differential equation.	
+\end{definition}
+
